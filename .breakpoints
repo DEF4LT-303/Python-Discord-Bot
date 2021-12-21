@@ -4,19 +4,19 @@
       {
         "id": "50563ef5-682b-4353-9080-d2251d8761a5",
         "line": 15,
-        "version": 753,
+        "version": 1,
         "index": 334
       },
       {
         "id": "fde0dca3-b5ad-4817-a011-a170910cee35",
         "line": 23,
-        "version": 753,
+        "version": 1,
         "index": 636
       },
       {
         "id": "dc15fed7-bee5-4c13-9d07-2336f4de4aba",
         "line": 72,
-        "version": 753,
+        "version": 1,
         "index": 2587
       }
     ],
@@ -24,16 +24,16 @@
       {
         "id": "d9cd6755-27b0-4364-93af-0d5e7b9a3c31",
         "line": 51,
-        "version": 1256,
-        "index": 1282
+        "version": 1,
+        "index": 1281
       }
     ],
     "main.py": [
       {
         "id": "29af6f25-7865-4154-b423-12b86454f0aa",
         "line": 17,
-        "version": 11089,
-        "index": 377
+        "version": 3,
+        "index": 366
       }
     ]
   }
