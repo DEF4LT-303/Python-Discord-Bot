@@ -7,7 +7,7 @@ from main import *
 async def remove_money(users, user, channel, amount):
 
   try: 
-    if users[f'{user.id}']['money'] < 1000:
+    if users[f'{user.id}']['money'] < amount:
       await channel.send('You dont have enough **potatoes!**')
       return False
 
@@ -30,14 +30,30 @@ async def img(ctx, *,arg):
   with open('./cogs/Data/economy.json', 'r') as f:
       users = json.load(f)
 
+  files = []
+  for filename in os.listdir('./cogs/Image'):
+      if filename.endswith('PNG'):
+
+        files.append(filename[:-4])
+
   user = ctx.author
   channel = ctx.channel
-  check = await remove_money(users, user, channel, 5000)
-  
-  if check is True:
-    if ctx.guild.id == 736748152962547802:
-      z=str(arg)
-      await ctx.channel.send(file=discord.File(f'./cogs/Image/{z}.PNG'))
+    
+
+  if arg in files:
+
+    if arg=="list":
+      msg = await ctx.channel.send(file=discord.File(f'./cogs/Image/{arg}.PNG'))
+    else:
+      check = await remove_money(users, user, channel, 5000)
+      if check is True:
+        if ctx.guild.id == 736748152962547802:
+          z=str(arg)
+          msg = await ctx.channel.send(file=discord.File(f'./cogs/Image/{z}.PNG'))
+          
+
+          await asyncio.sleep(15)
+          await msg.delete()
 
   with open('./cogs/Data/economy.json', 'w') as f:
       json.dump(users, f, indent=4)

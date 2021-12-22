@@ -52,6 +52,11 @@ class Help(commands.Cog):
             value=
             "○ Check Rank: `rank <@user>` \n○ Ranking Leaderboard: `top` \n○ Fetch User Info: `probe <@user>`",
             inline=True)
+        embedVar.add_field(
+            name=":frame_photo:Image",
+            value=
+            "○ img list: `list (Shows list)`",
+            inline=True)
 
 
         # embedVar.add_field(

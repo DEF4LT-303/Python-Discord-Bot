@@ -14,7 +14,7 @@ class Voice(commands.Cog):
   async def remove_money(self, users, user, channel, amount):
 
     try: 
-      if users[f'{user.id}']['money'] < 1000:
+      if users[f'{user.id}']['money'] < amount:
         await channel.send('You dont have enough **potatoes!**')
         return False
 
