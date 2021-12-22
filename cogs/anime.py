@@ -27,7 +27,7 @@ class Anime(commands.Cog):
     embedVar.add_field(name='NSFW Status', value=anime.is_nsfw(), inline=True)
     embedVar.set_thumbnail(url=anime.poster)
 
-    await ctx.send(embed=embedVar)
+    await ctx.send(embed=embedVar) #test
 
 def setup(client):
 
