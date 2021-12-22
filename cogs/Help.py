@@ -32,7 +32,7 @@ class Help(commands.Cog):
         embedVar.add_field(
             name=":sparkles: Fun",
             value=
-            "○ PP Machine: `ppsize <@user>` \n○ Gay Fortune: `howgay <@user>` \n○ Love Guru: `lovemeter <@user>`\n○ TalkingBot: `q <argument>`\n○ Voice Commands: `vc <argument>`\n○ Show Voice List: `voices`",
+            "○ PP Machine: `ppsize <@user>` \n○ Gay Fortune: `howgay <@user>` \n○ Love Guru: `lovemeter <@user>`\n○ TalkingBot: `q <argument>`\n○ [Server Specific] Voice Commands: `vc <argument>`\n○ [Server Specific] Show Voice List: `voices`\n○ Search Anime: `anime <argument>`",
             inline=True)
 
         embedVar.add_field(
@@ -55,8 +55,8 @@ class Help(commands.Cog):
         embedVar.add_field(
             name=":frame_photo:Image",
             value=
-            "○ img list: `list (Shows list)`",
-            inline=True)
+            "○ [Server Specific] Shows available img list: `img list`",
+            inline=False)
 
 
         # embedVar.add_field(
