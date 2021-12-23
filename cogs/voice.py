@@ -55,11 +55,10 @@ class Voice(commands.Cog):
 
     servers = ['894632180821663835', '736748152962547802', '498919143337361422'] # server IDs
     if str(ctx.guild.id) in servers:
-
-      check = await self.remove_money(users, user, channel, 1000)
-      if check is True:
-        
-        if msg in files:
+     
+      if msg in files:
+        check = await self.remove_money(users, user, channel, 1000)
+        if check is True:
 
           channel = ctx.message.author.voice.channel
           voice = await channel.connect()
@@ -78,9 +77,9 @@ class Voice(commands.Cog):
             await asyncio.sleep(1) #If it's not playing it waits 1 seconds
             while voice.is_playing(): #and checks once again if the bot is not playing
                 break #if it's playing it breaks
-                
-            else:
-                await voice.disconnect() #if not it disconnects
+              
+        else:
+            await voice.disconnect() #if not it disconnects
         
     else:
       await ctx.send('Not valid for this **Server**')

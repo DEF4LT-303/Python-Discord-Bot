@@ -45,12 +45,14 @@ async def img(ctx, *,arg):
     if arg=="list":
       msg = await ctx.channel.send(file=discord.File(f'./cogs/Image/{arg}.PNG'))
     else:
-      check = await remove_money(users, user, channel, 10000)
-      if check is True:
-        if ctx.guild.id == 736748152962547802:
+      if ctx.guild.id == 736748152962547802:
+        check = await remove_money(users, user, channel, 10000)
+        
+        if check is True:
+          
           z=str(arg)
           msg = await ctx.channel.send(file=discord.File(f'./cogs/Image/{z}.PNG'))
-          
+            
 
           await asyncio.sleep(15)
           await msg.delete()
