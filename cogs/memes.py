@@ -6,7 +6,11 @@ import random
 
 async def add_money(users, user, channel, amount):
     users[f'{user.id}']['money'] += amount
-    await channel.send(f'*Credited* `{amount}` 🥔')
+    await channel.send(f'*Congratulation! You have been credited* `{amount}` 🥔')
+
+async def remove_money(users, user, channel, amount):
+    users[f'{user.id}']['money'] -= amount
+    await channel.send(f'*Charged* `{amount}` 🥔')
 
 
 @commands.command(name='meme', aliases=['memes'])
@@ -19,8 +23,10 @@ async def memes(ctx):
 
   a = random.randint(0,30)
   if(a==0):
-    await add_money(users, user, channel, 100)
+    await add_money(users, user, channel, 1000)
+
   else:
+    await remove_money(users, user, channel, 500)
     await ctx.channel.send(file=discord.File(f'./cogs/Memes/{a}.PNG'))
   
   with open('./cogs/Data/economy.json', 'w') as f:
