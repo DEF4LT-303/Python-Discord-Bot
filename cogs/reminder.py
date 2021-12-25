@@ -1,7 +1,5 @@
 from main import *
 
-
-
 class DurationConverter(commands.Converter):
 
   async def convert(self, ctx, arg):

@@ -2,6 +2,7 @@ from main import *
 import random
 import asyncio
 import re
+from discord.ext.commands import CommandOnCooldown
 
 
 with open('./cogs/Data/text.txt', 'r') as f:
@@ -26,7 +27,7 @@ class Economy(commands.Cog):
 
 
   @commands.command(aliases=['race', 'work'])
-  # @commands.cooldown(1, 3600, type=commands.BucketType.user)
+  @commands.cooldown(1, 10, type=commands.BucketType.user)
   async def typerace(self, ctx):
 
     with open('./cogs/Data/economy.json', 'r') as f:
@@ -91,7 +92,6 @@ class Economy(commands.Cog):
       else:
         await ctx.send(embed=embedVar)
         await self.add(users, ctx.author, 50)
-      
         
 
     with open('./cogs/Data/economy.json', 'w') as f:
@@ -195,7 +195,11 @@ class Economy(commands.Cog):
       with open('./cogs/Data/economy.json', 'w') as f:
         json.dump(users, f, indent=4) 
 
-
+  @commands.Cog.listener()
+  async def on_command_error(self, ctx, error):
+      if isinstance(error, commands.CommandOnCooldown):
+        await ctx.send('**You are on cooldown!**')
+          
 
 def setup(client):
 
