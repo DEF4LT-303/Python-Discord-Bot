@@ -27,7 +27,7 @@ class Economy(commands.Cog):
 
 
   @commands.command(aliases=['race', 'work'])
-  @commands.cooldown(1, 10, type=commands.BucketType.user)
+  @commands.cooldown(1, 60, type=commands.BucketType.user)
   async def typerace(self, ctx):
 
     with open('./cogs/Data/economy.json', 'r') as f:
@@ -148,11 +148,9 @@ class Economy(commands.Cog):
     for i in range(len(res)-1, -1, -1): 
       
       money = res[i][1]['money']
-      person = ctx.message.guild.get_member(int(res[i][0]))
-      
-      if person is None:
-        p = await client.fetch_user(int(res[i][0]))
-        person = p.name
+     
+      p = await client.fetch_user(int(res[i][0]))
+      person = p.name
 
       lb += f'{count}. {person} - `{money}` 🥔\n'
 
@@ -198,7 +196,8 @@ class Economy(commands.Cog):
   @commands.Cog.listener()
   async def on_command_error(self, ctx, error):
       if isinstance(error, commands.CommandOnCooldown):
-        await ctx.send('**You are on cooldown!**')
+        command = client.get_command('race')
+        await ctx.send(f'**You are on cooldown!** Retry after `{round(command.get_cooldown_retry_after(ctx), 2)}` seconds [Due to rate-limit]')
           
 
 def setup(client):
