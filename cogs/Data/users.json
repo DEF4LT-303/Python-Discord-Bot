@@ -1,44 +1,44 @@
 {
     "233934996015022080": {
-        "exp_needed": 6,
-        "exp_next_lvl": 20,
-        "experience": 14,
-        "level": 1
+        "exp_needed": 4,
+        "exp_next_lvl": 81,
+        "experience": 16,
+        "level": 2
     },
     "275639430683951104": {
-        "exp_needed": 114,
+        "exp_needed": 90,
         "exp_next_lvl": 256,
-        "experience": 142,
+        "experience": 166,
         "level": 3
     },
     "305681776427139073": {
-        "exp_needed": 59,
-        "exp_next_lvl": 2401,
-        "experience": 2342,
-        "level": 6
+        "exp_needed": 1444,
+        "exp_next_lvl": 4096,
+        "experience": 2652,
+        "level": 7
     },
     "318658245654741004": {
-        "exp_needed": 16,
+        "exp_needed": 14,
         "exp_next_lvl": 20,
-        "experience": 4,
+        "experience": 6,
         "level": 1
     },
     "335808768979894283": {
-        "exp_needed": 1389,
+        "exp_needed": 1275,
         "exp_next_lvl": 4096,
-        "experience": 2707,
+        "experience": 2821,
         "level": 7
     },
     "341169240553816064": {
-        "exp_needed": 55,
+        "exp_needed": 35,
         "exp_next_lvl": 81,
-        "experience": 26,
+        "experience": 46,
         "level": 2
     },
     "399972625583177738": {
-        "exp_needed": 981,
+        "exp_needed": 859,
         "exp_next_lvl": 2401,
-        "experience": 1420,
+        "experience": 1542,
         "level": 6
     },
     "467788990880415764": {
@@ -48,10 +48,10 @@
         "level": 4
     },
     "560497173570256927": {
-        "exp_needed": 7,
-        "exp_next_lvl": 625,
-        "experience": 618,
-        "level": 4
+        "exp_needed": 660,
+        "exp_next_lvl": 1296,
+        "experience": 636,
+        "level": 5
     },
     "577947596287639603": {
         "exp_needed": 126,
@@ -70,5 +70,11 @@
         "exp_next_lvl": 256,
         "experience": 94,
         "level": 3
+    },
+    "896446342812020746": {
+        "exp_needed": 41,
+        "exp_next_lvl": 81,
+        "experience": 40,
+        "level": 2
     }
 }

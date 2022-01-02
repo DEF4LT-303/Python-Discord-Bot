@@ -3,7 +3,6 @@ import os
 import json
 import asyncio 
 from itertools import cycle
-from datetime import datetime
 import time
 from keep_alive import keep_alive
 from discord.ext import commands, tasks
@@ -144,7 +143,7 @@ async def on_command_error(ctx, error):
 
 
 for filename in os.listdir('./cogs'):
-  if filename.endswith('py'):
+  if filename.endswith('py') and filename != 'new_leveling.py':
 
     client.load_extension(f'cogs.{filename[:-3]}')
 
