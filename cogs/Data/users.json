@@ -1,8 +1,8 @@
 {
     "233934996015022080": {
-        "exp_needed": 4,
+        "exp_needed": 63,
         "exp_next_lvl": 81,
-        "experience": 16,
+        "experience": 18,
         "level": 2
     },
     "275639430683951104": {
@@ -12,9 +12,9 @@
         "level": 3
     },
     "305681776427139073": {
-        "exp_needed": 1444,
+        "exp_needed": 1360,
         "exp_next_lvl": 4096,
-        "experience": 2652,
+        "experience": 2736,
         "level": 7
     },
     "318658245654741004": {
@@ -24,9 +24,9 @@
         "level": 1
     },
     "335808768979894283": {
-        "exp_needed": 1275,
+        "exp_needed": 1265,
         "exp_next_lvl": 4096,
-        "experience": 2821,
+        "experience": 2831,
         "level": 7
     },
     "341169240553816064": {

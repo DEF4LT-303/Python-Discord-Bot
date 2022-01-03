@@ -2,6 +2,7 @@ from main import *
 import random
 import asyncio
 import re
+from datetime import datetime
 from discord.ext.commands import CommandOnCooldown
 
 
@@ -35,7 +36,7 @@ class Economy(commands.Cog):
 
     await self.check(users, ctx.author)
 
-    sentence = random.choice(sentences)
+    sentence = random.choice(sentences[:200])
     length = len(sentence.split())
     formatted = re.sub(r'[^A-Za-z ]+', "", sentence).lower()
     emoji = ""
