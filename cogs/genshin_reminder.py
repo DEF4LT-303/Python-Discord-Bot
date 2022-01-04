@@ -22,8 +22,8 @@ class Test(commands.Cog):
     guild = client.get_guild(736748152962547802)
     role = get(guild.roles, name = 'Genshin Daily') 
 
-    if new_time == '23:45':
-      await channel.send(f'{role.mention} Don\'t forget you dailies!')
+    if new_time == '22:00':
+      await channel.send(f'{role.mention} Don\'t forget you dailies! - {test.strftime("%d/%m/%Y")}')
     
       await asyncio.sleep(3600)
 
