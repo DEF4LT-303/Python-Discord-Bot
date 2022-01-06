@@ -6,15 +6,15 @@
         "level": 2
     },
     "275639430683951104": {
-        "exp_needed": 90,
+        "exp_needed": 84,
         "exp_next_lvl": 256,
-        "experience": 166,
+        "experience": 172,
         "level": 3
     },
     "305681776427139073": {
-        "exp_needed": 1150,
+        "exp_needed": 1088,
         "exp_next_lvl": 4096,
-        "experience": 2946,
+        "experience": 3008,
         "level": 7
     },
     "318658245654741004": {
@@ -24,15 +24,15 @@
         "level": 1
     },
     "335808768979894283": {
-        "exp_needed": 1227,
+        "exp_needed": 1179,
         "exp_next_lvl": 4096,
-        "experience": 2869,
+        "experience": 2917,
         "level": 7
     },
     "341169240553816064": {
-        "exp_needed": 33,
+        "exp_needed": 31,
         "exp_next_lvl": 81,
-        "experience": 48,
+        "experience": 50,
         "level": 2
     },
     "399972625583177738": {
@@ -48,9 +48,9 @@
         "level": 5
     },
     "560497173570256927": {
-        "exp_needed": 652,
+        "exp_needed": 650,
         "exp_next_lvl": 1296,
-        "experience": 644,
+        "experience": 646,
         "level": 5
     },
     "577947596287639603": {
@@ -76,5 +76,11 @@
         "exp_next_lvl": 81,
         "experience": 42,
         "level": 2
+    },
+    "927442959388000287": {
+        "exp_needed": 18,
+        "exp_next_lvl": 20,
+        "experience": 2,
+        "level": 1
     }
 }
