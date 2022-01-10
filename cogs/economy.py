@@ -26,13 +26,27 @@ class Economy(commands.Cog):
 
     users[f'{user.id}']['money'] += amount
 
+  async def add_wpm(self, users, user, wpm):
+
+    if not f'{user.id}' in users:
+      users[f'{user.id}'] = {}
+      users[f'{user.id}']['wpm'] = wpm
+      
+
+    else:
+      if wpm > users[f'{user.id}']['wpm']:
+        users[f'{user.id}']['wpm'] = wpm
+
 
   @commands.command(aliases=['race', 'work'])
-  @commands.cooldown(1, 60, type=commands.BucketType.user)
+  # @commands.cooldown(1, 60, type=commands.BucketType.user)
   async def typerace(self, ctx):
 
     with open('./cogs/Data/economy.json', 'r') as f:
       users = json.load(f)
+    
+    with open('./cogs/Data/wpm.json', 'r') as f:
+      wpm_file = json.load(f)
 
     await self.check(users, ctx.author)
 
@@ -89,6 +103,8 @@ class Economy(commands.Cog):
 
         await self.add(users, ctx.author, money)
 
+        await self.add_wpm(wpm_file, ctx.author, int(wpm))
+
         
       else:
         await ctx.send(embed=embedVar)
@@ -97,6 +113,9 @@ class Economy(commands.Cog):
 
     with open('./cogs/Data/economy.json', 'w') as f:
       json.dump(users, f, indent=4, sort_keys=True)
+
+    with open('./cogs/Data/wpm.json', 'w') as f:
+      json.dump(wpm_file, f, indent=4, sort_keys=True)
 
 
   @commands.command(aliases=['bal'])
@@ -133,8 +152,8 @@ class Economy(commands.Cog):
     with open('./cogs/Data/economy.json', 'w') as f:
       json.dump(users, f, indent=4)
     
-  @commands.command(aliases=['lb'])
-  async def leaderboard(self, ctx):
+  @commands.command(aliases=['lb money', 'lbpotatoes'])
+  async def leaderboard_money(self, ctx):
 
     with open('./cogs/Data/economy.json', 'r') as f:
           users = json.load(f)
@@ -154,6 +173,35 @@ class Economy(commands.Cog):
       person = p.name
 
       lb += f'{count}. {person} - `{money}` 🥔\n'
+
+      count += 1
+
+    
+
+    em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings', description=f'{lb}')
+    await ctx.send(embed=em)
+
+  @commands.command(aliases=['lbwpm'])
+  async def leaderboard_wpm(self, ctx):
+
+    with open('./cogs/Data/wpm.json', 'r') as f:
+          users = json.load(f)
+
+    lb = ''
+
+    res = sorted(users.items(), key = lambda x: x[1]['wpm'])
+
+    count = 1
+    checker = len(res)-1
+    
+    for i in range(len(res)-1, -1, -1): 
+      
+      money = res[i][1]['wpm']
+     
+      p = await client.fetch_user(int(res[i][0]))
+      person = p.name
+
+      lb += f'{count}. {person} - `{money}` WPM\n'
 
       count += 1
 
