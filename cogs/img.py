@@ -42,7 +42,7 @@ async def img(ctx, *,arg):
 
   if arg in files:
 
-    if arg=="list":
+    if arg=="list" and ctx.guild.id == 736748152962547802:
       msg = await ctx.channel.send(file=discord.File(f'./cogs/Image/{arg}.PNG'))
     else:
       if ctx.guild.id == 736748152962547802:

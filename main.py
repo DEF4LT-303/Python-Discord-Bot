@@ -38,7 +38,7 @@ client = commands.Bot(command_prefix = get_prefix, intents = discord.Intents.all
 
 client.remove_command('help')
 
-status = cycle(['Objective: Make people GAY!', 'ধনের আলাপ করতে ধন চাপুন', 'Cyka Blyat!', f'in {server_count()} servers'])
+status = cycle(['Objective: Make people GAY!', 'Cyka Blyat!', f'in {server_count()} servers'])
 
 @client.event
 async def on_ready():

@@ -178,7 +178,7 @@ class Economy(commands.Cog):
 
     
 
-    em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings', description=f'{lb}')
+    em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings [Money]', description=f'{lb}')
     await ctx.send(embed=em)
 
   @commands.command(aliases=['lbwpm'])
@@ -207,7 +207,7 @@ class Economy(commands.Cog):
 
     
 
-    em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings', description=f'{lb}')
+    em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings [WPM]', description=f'{lb}')
     await ctx.send(embed=em)
   
   @commands.command()
