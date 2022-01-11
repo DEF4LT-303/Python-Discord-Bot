@@ -140,11 +140,11 @@ class LevelUp(commands.Cog):
     lb = ''
 
     res = sorted(users.items(), key = lambda x: x[1]['experience'])
+    res.reverse()
 
     count = 1
-    checker = len(res)-1
     
-    for i in range(len(res)-1, -1, -1): 
+    for i in range(10): 
       
       level = res[i][1]['level']
       

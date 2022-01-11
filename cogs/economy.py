@@ -39,7 +39,7 @@ class Economy(commands.Cog):
 
 
   @commands.command(aliases=['race', 'work'])
-  # @commands.cooldown(1, 60, type=commands.BucketType.user)
+  @commands.cooldown(1, 30, type=commands.BucketType.user)
   async def typerace(self, ctx):
 
     with open('./cogs/Data/economy.json', 'r') as f:
@@ -161,11 +161,11 @@ class Economy(commands.Cog):
     lb = ''
 
     res = sorted(users.items(), key = lambda x: x[1]['money'])
+    res.reverse()
 
     count = 1
-    checker = len(res)-1
     
-    for i in range(len(res)-1, -1, -1): 
+    for i in range(10): 
       
       money = res[i][1]['money']
      
@@ -190,21 +190,33 @@ class Economy(commands.Cog):
     lb = ''
 
     res = sorted(users.items(), key = lambda x: x[1]['wpm'])
+    res.reverse()
 
     count = 1
-    checker = len(res)-1
     
-    for i in range(len(res)-1, -1, -1): 
+    if len(res) > 10:
+      for i in range(10): 
+        
+        money = res[i][1]['wpm']
       
-      money = res[i][1]['wpm']
-     
-      p = await client.fetch_user(int(res[i][0]))
-      person = p.name
+        p = await client.fetch_user(int(res[i][0]))
+        person = p.name
 
-      lb += f'{count}. {person} - `{money}` WPM\n'
+        lb += f'{count}. {person} - `{money}` WPM\n'
 
-      count += 1
+        count += 1
 
+    else:
+      for i in range(len(res)): 
+        
+        money = res[i][1]['wpm']
+      
+        p = await client.fetch_user(int(res[i][0]))
+        person = p.name
+
+        lb += f'{count}. {person} - `{money}` WPM\n'
+
+        count += 1
     
 
     em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings [WPM]', description=f'{lb}')
