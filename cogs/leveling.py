@@ -66,23 +66,29 @@ class LevelUp(commands.Cog):
     users[f'{user.id}']['exp_needed'] = exp_next - exp 
 
     if lvl_start < lvl_end:
-      await message.send(f'{user.mention} has reached level {lvl_end}')
+      
+      # await message.send(f'{user.mention} has reached level {lvl_end}')
+
+      channel = client.get_channel(932563858298638346)
+      user_name = await client.fetch_user(user.id)
+
+      await channel.send(f'{user_name.name} has reached level {lvl_end}')
 
       users[f'{user.id}']['level'] = lvl_end
       users[f'{user.id}']['exp_next_lvl'] = (users[f'{user.id}']['level'] + 1)**4
 
   async def lb_check(self, users, user):
 
-    res = sorted(users.items(), key = lambda x: x[1]['level'])
-
-    checker = len(res)
+    res = sorted(users.items(), key = lambda x: x[1]['experience'])
+    # res.reverse()
     
-    for i in range(len(res)-1, -1, -1): 
+    
+    for i in range(len(res)): 
       
       author = res[i][0]
       
       if int(author) == user.id:
-        return abs(i - checker)
+        return abs(i - len(res))
 
       
 
