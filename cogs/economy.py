@@ -66,9 +66,7 @@ class Economy(commands.Cog):
 
     send = await ctx.send(f"{emoji}")
 
-    birthday=["happy bday to the retired friendly pedophile","congrats on being one year closer to sixty nine years old grampa tatooo","happy bday keqing filter potato","happy bday best potato"]
-    lineb=random.choice(birthday)
-    embedVar = discord.Embed(description=lineb, color=discord.Colour.random())
+    embedVar = discord.Embed(description='You have failed to answer correctly!',       color=discord.Colour.random())
 
 
     #-------check if msg is from author-------#
