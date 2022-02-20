@@ -1,5 +1,6 @@
 from main import *
 import random
+from random import sample
 import asyncio
 import re
 from datetime import datetime
@@ -8,9 +9,8 @@ from discord.ext.commands import CommandOnCooldown
 
 with open('./cogs/Data/text.txt', 'r') as f:
   sentences = [i.replace('\n', '') or i for i in f.readlines()]
-
-
 class Economy(commands.Cog):
+
 
   def __init__(self, client):
 
@@ -39,7 +39,8 @@ class Economy(commands.Cog):
 
 
   @commands.command(aliases=['race', 'work'])
-  @commands.cooldown(1, 30, type=commands.BucketType.user)
+  @commands.cooldown(1, 1, type=commands.BucketType.user)
+  ##
   async def typerace(self, ctx):
 
     with open('./cogs/Data/economy.json', 'r') as f:
@@ -49,8 +50,9 @@ class Economy(commands.Cog):
       wpm_file = json.load(f)
 
     await self.check(users, ctx.author)
-
+    
     sentence = random.choice(sentences[:200])
+
     length = len(sentence.split())
     formatted = re.sub(r'[^A-Za-z ]+', "", sentence).lower()
     emoji = ""
@@ -64,8 +66,9 @@ class Economy(commands.Cog):
 
     send = await ctx.send(f"{emoji}")
 
-
-    embedVar = discord.Embed(description='You have failed to answer correctly!', color=discord.Colour.random())
+    birthday=["happy bday to the retired friendly pedophile","congrats on being one year closer to sixty nine years old grampa tatooo","happy bday keqing filter potato","happy bday best potato"]
+    lineb=random.choice(birthday)
+    embedVar = discord.Embed(description=lineb, color=discord.Colour.random())
 
 
     #-------check if msg is from author-------#

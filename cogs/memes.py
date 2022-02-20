@@ -14,10 +14,6 @@ async def remove_money(users, user, channel, amount):
       if users[f'{user.id}']['money'] < amount:
         await channel.send('You dont have enough **potatoes!**')
         return False
-
-      # elif not f'{user.id}' in users:
-      #   await channel.send('You dont have enough **potatoes!**')
-      #   return False
       
       else:
         users[f'{user.id}']['money'] -= amount
@@ -37,7 +33,7 @@ async def memes(ctx):
   user = ctx.author
   channel = ctx.channel
 
-  a = random.randint(0,30)
+  a = random.randint(0,31)
   if(a==0):
     await add_money(users, user, channel, 1000)
 
