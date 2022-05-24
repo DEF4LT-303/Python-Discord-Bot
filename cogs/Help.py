@@ -31,7 +31,7 @@ class Help(commands.Cog):
           embedVar.add_field(
               name=":wrench: Utility",
               value=
-              '○ Invite Link: `invite`\n○ urbandictionary: `ud <argument>` \n○ Morse Code: `mc <argument>` \n○ Morse Code translator: `mcd <argument>` \n○ Reminder: `remind <time> <argument>`',
+              '○ Invite Link: `invite`\n○ urbandictionary: `ud <argument>`\n○  Calculator: `cal 1+2+3`\no Round off: `round(n,number after decimal)`\n○ Morse Code: `mc <argument>` \n○ Morse Code translator: `mcd <argument>` \n○ Reminder: `remind <time> <argument>`',
               inline=True)
 
           embedVar.add_field(
@@ -80,7 +80,7 @@ class Help(commands.Cog):
           embedVar.add_field(
               name=":wrench: Utility",
               value=
-              '○ Invite Link: `invite`\n○ urbandictionary: `ud <argument>` \n○ Morse Code: `mc <argument>` \n○ Morse Code translator: `mcd <argument>` \n○ Reminder: `remind <time> <argument>`',
+              '○ Invite Link: `invite`\n○ urbandictionary: `ud <argument>`\n○  Calculator: `cal 1+2+3`\no Round off: `round(n,number after decimal)`\n○ Morse Code: `mc <argument>` \n○ Morse Code translator: `mcd <argument>` \n○ Reminder: `remind <time> <argument>`',
               inline=True)
 
           embedVar.add_field(

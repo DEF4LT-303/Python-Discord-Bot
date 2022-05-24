@@ -63,7 +63,7 @@ async def ppsize(ctx, arg=None):
   
   else:
 
-    if(arg=="<@!335808768979894283>"or arg=="<@!305681776427139073>"):
+    if(arg=="<@335808768979894283>" or arg=="<@305681776427139073>"):
       owners_size=random.randint(14,20)
       pp = '8' + size*owners_size + 'D'
 
@@ -82,7 +82,7 @@ async def ppsize(ctx, arg=None):
     #   await ctx.channel.send(embed=embedVar)
     
     #Shakira
-    elif(arg=='<@!560497173570256927>'):
+    elif(arg=='<@560497173570256927>'):
 
       embedVar = discord.Embed(title='PP Check', description=f'She is a girl. If she had one, It would be bigger than yours', color=0xFFBBAC)
       await ctx.channel.send(embed=embedVar)

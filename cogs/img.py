@@ -33,7 +33,6 @@ async def img(ctx, *,arg):
   files = []
   for filename in os.listdir('./cogs/Image'):
       if filename.endswith('PNG'):
-
         files.append(filename[:-4])
 
   user = ctx.author

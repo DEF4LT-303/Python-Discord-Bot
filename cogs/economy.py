@@ -10,7 +10,7 @@ from discord.ext.commands import CommandOnCooldown
 with open('./cogs/Data/text.txt', 'r') as f:
   sentences = [i.replace('\n', '') or i for i in f.readlines()]
 class Economy(commands.Cog):
-
+  
 
   def __init__(self, client):
 
