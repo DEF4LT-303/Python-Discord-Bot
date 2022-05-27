@@ -14,22 +14,27 @@ async def genshin(ctx, *,arg=''):
   else:
     z=str(arg)
     z=z.lower()
-    # try:
-      #texts for embed
+
+    
     with open('./cogs/GenshinDATA/genshinimpact.txt', 'r') as f:
       counter = f.readline()
+      
     text=''
+    
     whereword=0
+    
     countersplit=counter.split(' ')
+    
     colour=[]
     kalar=''
+    
     for i in range(0,len(countersplit)):
       if(countersplit[i]==z):
         whereword=int(i)
+    
     kalar=countersplit[whereword+1]
     kalar=int(str(kalar),16)
     colour.append(kalar)
-    
       
     for i in range(whereword+2,len(countersplit)):
       if(countersplit[i]=='/n\n'):
@@ -41,14 +46,14 @@ async def genshin(ctx, *,arg=''):
       
     #embed-1
     embed = discord.Embed(title="Genshin Impact", description=arg.upper(), color=random.choice(colour)) 
-    file = discord.File(f'./cogs/Genshin/{z}Banner.png', filename="image.png")
+    file = discord.File(f'./cogs/Genshin/{z}Banner.PNG', filename="image.png")
     embed.set_image(url="attachment://image.png")
     msg = ctx.send(file=file, embed=embed)
     await msg
 
     #embed-2
     embed= discord.Embed(title=arg.upper(), description=text, color=random.choice(colour))
-    file = discord.File(f'./cogs/Genshin/{z}AS.jpg', filename="image.jpg")
+    file = discord.File(f'./cogs/Genshin/{z}AS.PNG', filename="image.jpg")
     embed.set_image(url="attachment://image.jpg")
     msg = ctx.send(file=file, embed=embed)
     await msg

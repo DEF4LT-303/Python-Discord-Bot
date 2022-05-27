@@ -222,6 +222,32 @@ class Economy(commands.Cog):
 
     em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings [WPM]', description=f'{lb}')
     await ctx.send(embed=em)
+
+  @commands.command(aliases=['give'])
+  async def user_add(self, ctx, user: discord.Member, amount):
+
+    if user == ctx.author:
+      await ctx.send('You cannot give money to yourself dumbass.')
+
+    else:
+      with open('./cogs/Data/economy.json', 'r') as f:
+        users = json.load(f)
+
+      await self.check(users, user)
+
+      curr_money = users[f'{ctx.author.id}']['money']
+      if curr_money > int(amount):
+        users[f'{ctx.author.id}']['money'] -= int(amount)
+        users[f'{user.id}']['money'] += int(amount)
+  
+        await ctx.send(f'**{ctx.author}** has transferred {int(amount)} 🥔 to {user.mention}')
+
+      else:
+        await ctx.send('You don\'t have enought money dumbass')
+
+      with open('./cogs/Data/economy.json', 'w') as f:
+        json.dump(users, f, indent=4) 
+                    
   
   @commands.command()
   async def admin_add(self, ctx, user: discord.Member, amount):
@@ -234,7 +260,7 @@ class Economy(commands.Cog):
 
       users[f'{user.id}']['money'] += int(amount)
 
-      await  ctx.send(f"{amount} potatoes added to {user}'s account")
+      await  ctx.send(f"{amount} 🥔 added to {user}'s account")
 
       with open('./cogs/Data/economy.json', 'w') as f:
         json.dump(users, f, indent=4)    
@@ -250,7 +276,7 @@ class Economy(commands.Cog):
 
       users[f'{user.id}']['money'] -= int(amount)
 
-      await  ctx.send(f"{amount} potatoes removed {user}'s account")
+      await  ctx.send(f"{amount} 🥔 removed {user}'s account")
 
       with open('./cogs/Data/economy.json', 'w') as f:
         json.dump(users, f, indent=4) 

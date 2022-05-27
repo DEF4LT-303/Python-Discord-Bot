@@ -12,6 +12,7 @@ class Calculator(commands.Cog):
   @commands.command()
   async def cal(self, ctx,*, arg=None):
     number=str(arg)
+    number=number.replace('^','**')
     for i in range(len(number)):
       total=eval(number)
     await ctx.send(total)
