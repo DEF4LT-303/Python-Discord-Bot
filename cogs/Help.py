@@ -49,7 +49,7 @@ class Help(commands.Cog):
           embedVar.add_field(
               name=":moneybag: Economy",
               value=
-              "○ Play Type Racer [earn]: `typerace` \n○ Check  Balance [register]: `bal <@user>` \n○ Type Racer Leaderboard: `lbpotatoes` | `lbwpm`",
+              "○ Play Type Racer [earn]: `typerace` \n○ Check  Balance [register]: `bal <@user>` \n○ Type Racer Leaderboard: `lbpotatoes` | `lbwpm` \n○ Give money to user: `give <@user> <amount>`",
               inline=True)      
 
           embedVar.add_field(
@@ -98,7 +98,7 @@ class Help(commands.Cog):
           embedVar.add_field(
               name=":moneybag: Economy",
               value=
-              "○ Play Type Racer [earn]: `typerace` \n○ Check  Balance [register]: `bal <@user>` \n○ Type Racer Leaderboard: `lbpotatoes` | `lbwpm`",
+              "○ Play Type Racer [earn]: `typerace` \n○ Check  Balance [register]: `bal <@user>` \n○ Type Racer Leaderboard: `lbpotatoes` | `lbwpm` \n○ Give money to user: `give <@user> <amount>`",
               inline=True)      
 
           embedVar.add_field(
