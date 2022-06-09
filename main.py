@@ -33,8 +33,11 @@ def server_count():
 #---------------------------------INFO-----------------------------------------#
 
 
-version = '0.5'
+version = '2.0'
+
 client = commands.Bot(command_prefix = get_prefix, intents = discord.Intents.all())
+
+
 
 client.remove_command('help')
 
@@ -129,16 +132,16 @@ async def ping(ctx):
   
 
   embedVar = discord.Embed(title="Latency", description=f'Pong! {latency}ms', color=clr)
-  embedVar.set_footer(text = f'Requested by {ctx.author}' ,icon_url = ctx.author.avatar_url)
+  embedVar.set_footer(text = f'Requested by {ctx.author}' ,icon_url = ctx.author.avatar.url)
 
   await asyncio.sleep(1)
   await message.edit(embed=embedVar)
 #-----------------------Error Handler------------------------------------------#
-@client.event
-async def on_command_error(ctx, error):
-    if isinstance(error, CommandNotFound):
-        return
-    raise error
+# @client.event
+# async def on_command_error(ctx, error):
+#     if isinstance(error, CommandNotFound):
+#         return
+#     raise error
 ##------------------Access Files---------------------------------
 
 

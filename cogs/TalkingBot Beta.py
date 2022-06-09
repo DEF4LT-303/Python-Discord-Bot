@@ -5,7 +5,7 @@ from main import *
 
 @commands.command()
 async def q(ctx,*,arg=''):
-
+  
   if(arg==''):
       #await ctx.channel.send(embed=embedVar)
     await ctx.channel.send("Ask me anything!")

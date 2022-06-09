@@ -9,14 +9,17 @@ from main import client
 
 
 
-class UrbanDictionary(commands.Cog):
+class UrbanDictionaryT(commands.Cog):
+
+
 
   def __init__(self, client):
     self.client = client
 
 
-  @commands.command(aliases=['ud'])
-  async def urbandictionary(self, ctx, *, arg=None):
+
+  @commands.command(aliases=['udt'])
+  async def urbandictionaryT(self, ctx, *, arg=None):
 
     ud_index = 0
 
@@ -49,8 +52,8 @@ class UrbanDictionary(commands.Cog):
       else:
         
 
-        button1 = Button(style=discord.ButtonStyle.blurple, emoji='⬅')
-        button2 = Button(style=discord.ButtonStyle.blurple, emoji='➡')
+        button1 = Button(label='PREVIOUS', style=discord.ButtonStyle.green)
+        button2 = Button(label='NEXT', style=discord.ButtonStyle.green)
 
         view = View()
         view.add_item(button1)
@@ -68,45 +71,45 @@ class UrbanDictionary(commands.Cog):
         message = await ctx.channel.send(embed=embedVar, view=view)
         
 
-      
-      async def button_callback1(interaction):
-        nonlocal ud_index
-        ud_index += 1
-        
-        ud_definition = json_data['list'][ud_index]['definition']
-        ud_example = json_data['list'][ud_index]['example']
-        ud_thumbs_up = json_data['list'][ud_index]['thumbs_up']
+      try:
+        async def button_callback1(interaction):
+          nonlocal ud_index
+          ud_index += 1
+          
+          ud_definition = json_data['list'][ud_index]['definition']
+          ud_example = json_data['list'][ud_index]['example']
+          ud_thumbs_up = json_data['list'][ud_index]['thumbs_up']
+  
+          embedVar = discord.Embed(title='Urban Dictionary', description=ud_definition, color=0xffff00)
+          embedVar.add_field(name="Example", value=ud_example, inline=False)
+          embedVar.set_footer(text = f'\U0001F44D {ud_thumbs_up}')
+  
+          msg = await message.edit(embed=embedVar)
 
-        embedVar = discord.Embed(title='Urban Dictionary', description=ud_definition, color=0xffff00)
-        embedVar.add_field(name="Example", value=ud_example, inline=False)
-        embedVar.set_footer(text = f'\U0001F44D {ud_thumbs_up}')
+        async def button_callback2(interaction):
+          nonlocal ud_index
+          ud_index -= 1
+          
+          ud_definition = json_data['list'][ud_index]['definition']
+          ud_example = json_data['list'][ud_index]['example']
+          ud_thumbs_up = json_data['list'][ud_index]['thumbs_up']
+  
+          embedVar = discord.Embed(title='Urban Dictionary', description=ud_definition, color=0xffff00)
+          embedVar.add_field(name="Example", value=ud_example, inline=False)
+          embedVar.set_footer(text = f'\U0001F44D {ud_thumbs_up}')
+  
+          msg = await message.edit(embed=embedVar)
+          
+  
+        button1.callback = button_callback1
+        button2.callback = button_callback2
 
-        msg = await message.edit(embed=embedVar)
+      except AttributeError:
+        pass
 
-      async def button_callback2(interaction):
-        nonlocal ud_index
-        ud_index -= 1
-        
-        ud_definition = json_data['list'][ud_index]['definition']
-        ud_example = json_data['list'][ud_index]['example']
-        ud_thumbs_up = json_data['list'][ud_index]['thumbs_up']
-
-        embedVar = discord.Embed(title='Urban Dictionary', description=ud_definition, color=0xffff00)
-        embedVar.add_field(name="Example", value=ud_example, inline=False)
-        embedVar.set_footer(text = f'\U0001F44D {ud_thumbs_up}')
-
-        msg = await message.edit(embed=embedVar)
-        
-
-      button1.callback = button_callback1
-      button2.callback = button_callback2
-
-    async def on_timeout():
-      return
-
-    
+     
 
 
 def setup(client):
     # Every extension should have this function
-    client.add_cog(UrbanDictionary(client))
+    client.add_cog(UrbanDictionaryT(client))

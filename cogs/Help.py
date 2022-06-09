@@ -62,7 +62,7 @@ class Help(commands.Cog):
 
 
           embedVar.set_footer(text=f'Requested by {ctx.author}',
-                              icon_url=ctx.author.avatar_url)
+                              icon_url=ctx.author.avatar.url)
 
           await ctx.send(embed=embedVar)
 
@@ -119,7 +119,7 @@ class Help(commands.Cog):
           #     inline=False)
 
           embedVar.set_footer(text=f'Requested by {ctx.author}',
-                              icon_url=ctx.author.avatar_url)
+                              icon_url=ctx.author.avatar.url)
 
           await ctx.send(embed=embedVar)
           # await ctx.author.send(':poop:')
