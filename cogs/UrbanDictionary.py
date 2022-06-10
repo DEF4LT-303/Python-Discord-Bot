@@ -7,7 +7,16 @@ from discord.ui import Button, View
 from main import client
 
 
+class View(discord.ui.View):
+    def __init__(self, timeout):
+        super().__init__(timeout=timeout)
+        self.response = None 
 
+    async def on_timeout(self) -> None:
+        for child in self.children: 
+            child.disabled = True   
+
+        await self.response.edit(view=self)
 
 class UrbanDictionary(commands.Cog):
 
@@ -52,21 +61,24 @@ class UrbanDictionary(commands.Cog):
         button1 = Button(style=discord.ButtonStyle.blurple, emoji='⬅')
         button2 = Button(style=discord.ButtonStyle.blurple, emoji='➡')
 
-        view = View()
+        view = View(timeout=60)
         view.add_item(button1)
         view.add_item(button2)
+        
+        
 
   
         ud_definition = json_data['list'][0]['definition']
         ud_example = json_data['list'][0]['example']
         ud_thumbs_up = json_data['list'][0]['thumbs_up']
 
-        embedVar = discord.Embed(title='Urban Dictionary', description=ud_definition, color=0xffff00)
+        embedVar = discord.Embed(title=f'Urban Dictionary: {arg}', description=ud_definition, color=0xffff00)
         embedVar.add_field(name="Example", value=ud_example, inline=False)
         embedVar.set_footer(text = f'\U0001F44D {ud_thumbs_up}')
 
-        message = await ctx.channel.send(embed=embedVar, view=view)
-        
+        message = await ctx.send(embed=embedVar, view=view)
+
+        view.response = message
 
       
       async def button_callback1(interaction):
@@ -77,7 +89,7 @@ class UrbanDictionary(commands.Cog):
         ud_example = json_data['list'][ud_index]['example']
         ud_thumbs_up = json_data['list'][ud_index]['thumbs_up']
 
-        embedVar = discord.Embed(title='Urban Dictionary', description=ud_definition, color=0xffff00)
+        embedVar = discord.Embed(title=f'Urban Dictionary: {arg}', description=ud_definition, color=0xffff00)
         embedVar.add_field(name="Example", value=ud_example, inline=False)
         embedVar.set_footer(text = f'\U0001F44D {ud_thumbs_up}')
 
@@ -91,20 +103,20 @@ class UrbanDictionary(commands.Cog):
         ud_example = json_data['list'][ud_index]['example']
         ud_thumbs_up = json_data['list'][ud_index]['thumbs_up']
 
-        embedVar = discord.Embed(title='Urban Dictionary', description=ud_definition, color=0xffff00)
+        embedVar = discord.Embed(title=f'Urban Dictionary: {arg}', description=ud_definition, color=0xffff00)
         embedVar.add_field(name="Example", value=ud_example, inline=False)
         embedVar.set_footer(text = f'\U0001F44D {ud_thumbs_up}')
 
         msg = await message.edit(embed=embedVar)
+
         
 
       button1.callback = button_callback1
       button2.callback = button_callback2
 
-    async def on_timeout():
-      return
+      
 
-    
+      
 
 
 def setup(client):

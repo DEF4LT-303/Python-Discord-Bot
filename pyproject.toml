@@ -13,8 +13,8 @@ animec = "^0.3.5"
 pymongo = "^4.1.1"
 TagScriptEngine = "^2.3.0"
 "discord.py" = "^1.7.3"
-discord2 = "^2.0.1"
 discord-ui = "^5.1.6"
+discord2 = "^2.0.1"
 
 [tool.poetry.dev-dependencies]
 
