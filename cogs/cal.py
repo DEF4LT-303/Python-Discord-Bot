@@ -13,6 +13,7 @@ class Calculator(commands.Cog):
   async def cal(self, ctx,*, arg=None):
     number=str(arg)
     number=number.replace('^','**')
+    number=number.replace('pi','math.pi')
     for i in range(len(number)):
       total=eval(number)
     await ctx.send(total)
@@ -23,6 +24,8 @@ class Calculator(commands.Cog):
     z=z.split(',')
     res= round(float(z[0]),int(z[1]))
     await ctx.send(res)
+
+
 
   
 

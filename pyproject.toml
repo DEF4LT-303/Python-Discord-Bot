@@ -14,6 +14,8 @@ pymongo = "^4.1.1"
 TagScriptEngine = "^2.3.0"
 "discord.py" = "^1.7.3"
 discord-ui = "^5.1.6"
+ramael = "^0.0.1"
+genshinstats = "^1.4.11"
 discord2 = "^2.0.1"
 
 [tool.poetry.dev-dependencies]

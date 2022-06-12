@@ -136,7 +136,7 @@ class Economy(commands.Cog):
 
       embedVar = discord.Embed(description=f'You have `{money}` 🥔', color=0x97572b)
       embedVar.set_footer(text=f'Requested by {ctx.author}',
-                              icon_url=ctx.author.avatar_url)
+                              icon_url=ctx.author.avatar.url)
 
       await ctx.send(embed=embedVar)
     

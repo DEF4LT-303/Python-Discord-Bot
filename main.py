@@ -33,7 +33,7 @@ def server_count():
 #---------------------------------INFO-----------------------------------------#
 
 
-version = '2.0'
+version = '2.0.1'
 
 client = commands.Bot(command_prefix = get_prefix, intents = discord.Intents.all())
 
@@ -41,7 +41,7 @@ client = commands.Bot(command_prefix = get_prefix, intents = discord.Intents.all
 
 client.remove_command('help')
 
-status = cycle(['Objective: Make people GAY!', 'Cyka Blyat!', f'in {server_count()} servers'])
+status = cycle(['Cyka Blyat!', f'in {server_count()} servers'])
 
 @client.event
 async def on_ready():
@@ -142,18 +142,15 @@ async def ping(ctx):
 #     if isinstance(error, CommandNotFound):
 #         return
 #     raise error
-##------------------Access Files---------------------------------
+##------------------Access Files-----------------------------------------------#
 
 
 for filename in os.listdir('./cogs'):
-  if filename.endswith('py') and filename != 'new_leveling.py':
+  if filename.endswith('py'):
 
     client.load_extension(f'cogs.{filename[:-3]}')
 
-# for filename in os.listdir('./cogs/level system'):
-#   if filename.endswith('py'):
 
-#     client.load_extension(f'cogs.{filename[:-3]}')
 
 
 ##---------------------------------------------------

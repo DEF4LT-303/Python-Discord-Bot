@@ -118,7 +118,7 @@ class LevelUp(commands.Cog):
         
       args = {
         'bg_image' : 'https://discordjs.guide/assets/canvas-preview.30c4fe9e.png', # Background image link (Optional)
-        'profile_image' : str(user.avatar_url_as(format='png')), # User profile picture link
+        'profile_image' : user.avatar.url, # User profile picture link
         'level' : users[f'{user.id}']['level'], # User current level 
         'current_xp' : users[f'{user.id}']['level']**4, # Current level minimum xp 
         'user_xp' : users[f'{user.id}']['experience'], # User current xp

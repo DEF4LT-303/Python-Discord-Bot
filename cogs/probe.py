@@ -22,9 +22,9 @@ async def probe(ctx, member: discord.Member=None):
         name=f"Joined Server [{ctx.guild.name}]",
         value= joined_at, inline=True) 
     
-    embedVar.set_thumbnail(url=ctx.author.avatar_url)
+    embedVar.set_thumbnail(url=ctx.author.avatar.url)
 
-    embedVar.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar_url)
+    embedVar.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar.url)
 
   else:
 
@@ -43,9 +43,9 @@ async def probe(ctx, member: discord.Member=None):
         name=f"Joined Server [{ctx.guild.name}]",
         value= joined_at, inline=False)  
 
-    embedVar.set_thumbnail(url=member.avatar_url)
+    embedVar.set_thumbnail(url=member.avatar.url)
     
-    embedVar.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar_url)
+    embedVar.set_footer(text=f'Requested by {ctx.author}', icon_url=ctx.author.avatar.url)
 
   #-----------cooool effect-----------------#
   msg = await ctx.send('`> Probing user`')
