@@ -66,50 +66,62 @@ class Economy(commands.Cog):
 
     send = await ctx.send(f"{emoji}")
 
+    now = str(datetime.utcnow())
+    now = now[:-7][2:]
+    print(now)
+    nows = datetime.striptime(now, '%d-%m-%y %H:%M:%S')
+    # print(time[:-5][10:])
+    print('test')
+    
+    
+    
     embedVar = discord.Embed(description='You have failed to answer correctly!',       color=discord.Colour.random())
 
 
-    #-------check if msg is from author-------#
-    def check(m):
-      return m.author == ctx.author
-    #-----------------------------------------#
+    # #-------check if msg is from author-------#
+    # def check(m):
+    #   return m.author == ctx.author
+    # #-----------------------------------------#
 
-    try:
-      msg = await self.client.wait_for("message", check=check, timeout=60.0)
-      # pass
+    # try:
+    #   msg = await self.client.wait_for("message", check=check, timeout=60.0)
+    #   # pass
     
-    except asyncio.TimeoutError:
-      await ctx.send(embed=embedVar)
-      await self.add(users, ctx.author, 50)
+    # except asyncio.TimeoutError:
+    #   await ctx.send(embed=embedVar)
+    #   await self.add(users, ctx.author, 50)
 
-    else:
+    # else:
       
-      sentence = sentence.replace(' ','')
+    #   sentence = sentence.replace(' ','')
+      
+      
+    #   if msg.content.lower() == sentence.lower():
+        
+    #     time = str(datetime.utcnow() - send.created_at) # ERROR!
+    #     time_format = time[:-5][5:]
 
-      if msg.content.lower() == sentence.lower():
-        time = str(datetime.utcnow() - send.created_at)
-        time_format = time[:-5][5:]
+    #     if time_format[0] == '0':
+    #       time_format = time_format[1:]
 
-        if time_format[0] == '0':
-          time_format = time_format[1:]
+    #     embedVar2 = discord.Embed(description=f'You have finished the typerace in {time_format} seconds!', color=discord.Colour.random())
 
-        embedVar = discord.Embed(description=f'You have finished the typerace in {time_format} seconds!', color=discord.Colour.random())
+    #     wpm = (length / (float(time_format)/60))
+    #     money = int((wpm/100)*2000)
 
-        wpm = (length / (float(time_format)/60))
-        money = int((wpm/100)*2000)
+    #     embedVar2.add_field(name='Potatoes earned 🥔 - ', value=money)
+    #     embedVar2.add_field(name='WPM - ', value=int(wpm))
+    #     await ctx.send(embed=embedVar2)
+        
 
-        embedVar.add_field(name='Potatoes earned 🥔 - ', value=money)
-        embedVar.add_field(name='WPM - ', value=int(wpm))
-        await ctx.send(embed=embedVar)
+    #     await self.add(users, ctx.author, money)
 
-        await self.add(users, ctx.author, money)
-
-        await self.add_wpm(wpm_file, ctx.author, int(wpm))
+    #     await self.add_wpm(wpm_file, ctx.author, int(wpm))
 
         
-      else:
-        await ctx.send(embed=embedVar)
-        await self.add(users, ctx.author, 50)
+    #   else:
+    #     await ctx.send(embed=embedVar)
+    #     await self.add(users, ctx.author, 50)
         
 
     with open('./cogs/Data/economy.json', 'w') as f:
