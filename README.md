@@ -3,7 +3,7 @@
 
 ## Features
 - Plays music
-- Level $ Economy System
+- Level & Economy System
 - Urban Dictionary [Using API]
 - Other Fun Commands
 
