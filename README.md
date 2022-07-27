@@ -13,4 +13,4 @@
 
 **To Invite:** https://discord.com/api/oauth2/authorize?client_id=894627029717237800&permissions=0&scope=bot
 
-*Note: This bot is still under develoopment and it is our first learning project*
+*Note: This bot is still under development and it is our first learning project*
