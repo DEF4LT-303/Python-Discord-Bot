@@ -1,12 +1,12 @@
 # Speak-Beach-Bot
-**A  discord bot based on Python**
+**A  simple discord bot based on Python**
 
 **Authors:** Ryan and Shayanto
 
 ## Features
 - Plays music
 - Level & Economy System
-- Urban Dictionary [Using API]
+- Urban Dictionary, Anime informations [Using API]
 - Other Fun Commands
 
 > This bot is currently hosted on [Replit.com](https://replit.com)
