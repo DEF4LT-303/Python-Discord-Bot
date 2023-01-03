@@ -3,303 +3,298 @@ import random
 from random import sample
 import asyncio
 import re
-from datetime import datetime
+import datetime
 from discord.ext.commands import CommandOnCooldown
 
-
 with open('./cogs/Data/text.txt', 'r') as f:
-  sentences = [i.replace('\n', '') or i for i in f.readlines()]
+    sentences = [i.replace('\n', '') or i for i in f.readlines()]
+
+
 class Economy(commands.Cog):
-  
-
-  def __init__(self, client):
-
-    self.client = client 
-
-  async def check(self, users, user):
+    def __init__(self, client):
 
-    if not f'{user.id}' in users:
-      users[f'{user.id}'] = {}
-      users[f'{user.id}']['money'] = 100
+        self.client = client
 
-  async def add(self, users, user, amount):
-
-    users[f'{user.id}']['money'] += amount
+    async def check(self, users, user):
 
-  async def add_wpm(self, users, user, wpm):
+        if not f'{user.id}' in users:
+            users[f'{user.id}'] = {}
+            users[f'{user.id}']['money'] = 100
 
-    if not f'{user.id}' in users:
-      users[f'{user.id}'] = {}
-      users[f'{user.id}']['wpm'] = wpm
-      
+    async def add(self, users, user, amount):
 
-    else:
-      if wpm > users[f'{user.id}']['wpm']:
-        users[f'{user.id}']['wpm'] = wpm
+        users[f'{user.id}']['money'] += amount
 
+    async def add_wpm(self, users, user, wpm):
 
-  @commands.command(aliases=['race', 'work'])
-  @commands.cooldown(1, 1, type=commands.BucketType.user)
-  ##
-  async def typerace(self, ctx):
+        if not f'{user.id}' in users:
+            users[f'{user.id}'] = {}
+            users[f'{user.id}']['wpm'] = wpm
 
-    with open('./cogs/Data/economy.json', 'r') as f:
-      users = json.load(f)
-    
-    with open('./cogs/Data/wpm.json', 'r') as f:
-      wpm_file = json.load(f)
+        else:
+            if wpm > users[f'{user.id}']['wpm']:
+                users[f'{user.id}']['wpm'] = wpm
 
-    await self.check(users, ctx.author)
-    
-    sentence = random.choice(sentences[:200])
+    @commands.command(aliases=['race', 'work'])
+    @commands.cooldown(1, 1, type=commands.BucketType.user)
+    ##
+    async def typerace(self, ctx):
 
-    length = len(sentence.split())
-    formatted = re.sub(r'[^A-Za-z ]+', "", sentence).lower()
-    emoji = ""
+        with open('./cogs/Data/economy.json', 'r') as f:
+            users = json.load(f)
 
-    for i in formatted:
-      if i == " ":
-        emoji += "    "
-      
-      else:
-        emoji += f':regional_indicator_{i}: '
+        with open('./cogs/Data/wpm.json', 'r') as f:
+            wpm_file = json.load(f)
 
-    send = await ctx.send(f"{emoji}")
+        await self.check(users, ctx.author)
 
-    now = str(datetime.utcnow())
-    now = now[:-7][2:]
-    print(now)
-    nows = datetime.striptime(now, '%d-%m-%y %H:%M:%S')
-    # print(time[:-5][10:])
-    print('test')
-    
-    
-    
-    embedVar = discord.Embed(description='You have failed to answer correctly!',       color=discord.Colour.random())
+        sentence = random.choice(sentences[:200])
 
+        length = len(sentence.split())
+        formatted = re.sub(r'[^A-Za-z ]+', "", sentence).lower()
+        emoji = ""
 
-    # #-------check if msg is from author-------#
-    # def check(m):
-    #   return m.author == ctx.author
-    # #-----------------------------------------#
+        for i in formatted:
+            if i == " ":
+                emoji += "    "
 
-    # try:
-    #   msg = await self.client.wait_for("message", check=check, timeout=60.0)
-    #   # pass
-    
-    # except asyncio.TimeoutError:
-    #   await ctx.send(embed=embedVar)
-    #   await self.add(users, ctx.author, 50)
+            else:
+                emoji += f':regional_indicator_{i}: '
 
-    # else:
-      
-    #   sentence = sentence.replace(' ','')
-      
-      
-    #   if msg.content.lower() == sentence.lower():
-        
-    #     time = str(datetime.utcnow() - send.created_at) # ERROR!
-    #     time_format = time[:-5][5:]
+        send = await ctx.send(f"{emoji}")
 
-    #     if time_format[0] == '0':
-    #       time_format = time_format[1:]
+        init_time = datetime.datetime.now()
 
-    #     embedVar2 = discord.Embed(description=f'You have finished the typerace in {time_format} seconds!', color=discord.Colour.random())
 
-    #     wpm = (length / (float(time_format)/60))
-    #     money = int((wpm/100)*2000)
+        embedVar = discord.Embed(
+            description='You have failed to answer correctly!',
+            color=discord.Colour.random())
 
-    #     embedVar2.add_field(name='Potatoes earned 🥔 - ', value=money)
-    #     embedVar2.add_field(name='WPM - ', value=int(wpm))
-    #     await ctx.send(embed=embedVar2)
-        
+        #-------check if msg is from author-------#
+        def check(m):
+            return m.author == ctx.author
 
-    #     await self.add(users, ctx.author, money)
+        #-----------------------------------------#
 
-    #     await self.add_wpm(wpm_file, ctx.author, int(wpm))
+        try:
+            msg = await self.client.wait_for("message",
+                                             check=check,
+                                             timeout=60.0)
+            # pass
 
-        
-    #   else:
-    #     await ctx.send(embed=embedVar)
-    #     await self.add(users, ctx.author, 50)
-        
+        except asyncio.TimeoutError:
+            await ctx.send(embed=embedVar)
+            await self.add(users, ctx.author, 50)
 
-    with open('./cogs/Data/economy.json', 'w') as f:
-      json.dump(users, f, indent=4, sort_keys=True)
+        else:
 
-    with open('./cogs/Data/wpm.json', 'w') as f:
-      json.dump(wpm_file, f, indent=4, sort_keys=True)
+            sentence = sentence.replace(' ', '')
 
+            if msg.content.lower() == sentence.lower():
 
-  @commands.command(aliases=['bal'])
-  async def balance(self, ctx, user: discord.Member=None):
+                time = datetime.datetime.now() - init_time
+                time_format = round(time.total_seconds(), 2)
 
-    with open('./cogs/Data/economy.json', 'r') as f:
-      users = json.load(f)
-    
-    # await self.check(users, user)
-    
-    if not user:
-      user = ctx.author
+                embedVar2 = discord.Embed(
+                    description=
+                    f'You have finished the typerace in {time_format} seconds!',
+                    color=discord.Colour.random())
 
-      await self.check(users, user)
+                wpm = (length / (float(time_format) / 60))
+                money = int((wpm / 100) * 2000)
 
-      money = users[f'{user.id}']['money']
+                embedVar2.add_field(name='Potatoes earned 🥔 - ', value=money)
+                embedVar2.add_field(name='WPM - ', value=int(wpm))
+                await ctx.send(embed=embedVar2)
 
-      embedVar = discord.Embed(description=f'You have `{money}` 🥔', color=0x97572b)
-      embedVar.set_footer(text=f'Requested by {ctx.author}',
-                              icon_url=ctx.author.avatar.url)
+                await self.add(users, ctx.author, money)
 
-      await ctx.send(embed=embedVar)
-    
-    else:
-      await self.check(users, user)
+                await self.add_wpm(wpm_file, ctx.author, int(wpm))
 
-      money = users[f'{user.id}']['money']
+            else:
+                await ctx.send(embed=embedVar)
+                await self.add(users, ctx.author, 50)
 
-      embedVar = discord.Embed(description=f'{user} has `{money}` 🥔', color=0x97572b)
-      
+        with open('./cogs/Data/economy.json', 'w') as f:
+            json.dump(users, f, indent=4, sort_keys=True)
 
-      await ctx.send(embed=embedVar)
-    
-    with open('./cogs/Data/economy.json', 'w') as f:
-      json.dump(users, f, indent=4)
-    
-  @commands.command(aliases=['lb money', 'lbpotatoes'])
-  async def leaderboard_money(self, ctx):
+        with open('./cogs/Data/wpm.json', 'w') as f:
+            json.dump(wpm_file, f, indent=4, sort_keys=True)
 
-    with open('./cogs/Data/economy.json', 'r') as f:
-          users = json.load(f)
+    @commands.command(aliases=['bal'])
+    async def balance(self, ctx, user: discord.Member = None):
 
-    lb = ''
+        with open('./cogs/Data/economy.json', 'r') as f:
+            users = json.load(f)
 
-    res = sorted(users.items(), key = lambda x: x[1]['money'])
-    res.reverse()
+        # await self.check(users, user)
 
-    count = 1
-    
-    for i in range(10): 
-      
-      money = res[i][1]['money']
-     
-      p = await client.fetch_user(int(res[i][0]))
-      person = p.name
+        if not user:
+            user = ctx.author
 
-      lb += f'{count}. {person} - `{money}` 🥔\n'
+            await self.check(users, user)
 
-      count += 1
+            money = users[f'{user.id}']['money']
 
-    
+            embedVar = discord.Embed(description=f'You have `{money}` 🥔',
+                                     color=0x97572b)
+            embedVar.set_footer(text=f'Requested by {ctx.author}',
+                                icon_url=ctx.author.avatar.url)
 
-    em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings [Money]', description=f'{lb}')
-    await ctx.send(embed=em)
+            await ctx.send(embed=embedVar)
 
-  @commands.command(aliases=['lbwpm'])
-  async def leaderboard_wpm(self, ctx):
+        else:
+            await self.check(users, user)
 
-    with open('./cogs/Data/wpm.json', 'r') as f:
-          users = json.load(f)
+            money = users[f'{user.id}']['money']
 
-    lb = ''
+            embedVar = discord.Embed(description=f'{user} has `{money}` 🥔',
+                                     color=0x97572b)
 
-    res = sorted(users.items(), key = lambda x: x[1]['wpm'])
-    res.reverse()
+            await ctx.send(embed=embedVar)
 
-    count = 1
-    
-    if len(res) > 10:
-      for i in range(10): 
-        
-        money = res[i][1]['wpm']
-      
-        p = await client.fetch_user(int(res[i][0]))
-        person = p.name
+        with open('./cogs/Data/economy.json', 'w') as f:
+            json.dump(users, f, indent=4)
 
-        lb += f'{count}. {person} - `{money}` WPM\n'
+    @commands.command(aliases=['lb money', 'lbpotatoes'])
+    async def leaderboard_money(self, ctx):
 
-        count += 1
+        with open('./cogs/Data/economy.json', 'r') as f:
+            users = json.load(f)
 
-    else:
-      for i in range(len(res)): 
-        
-        money = res[i][1]['wpm']
-      
-        p = await client.fetch_user(int(res[i][0]))
-        person = p.name
+        lb = ''
 
-        lb += f'{count}. {person} - `{money}` WPM\n'
+        res = sorted(users.items(), key=lambda x: x[1]['money'])
+        res.reverse()
 
-        count += 1
-    
+        count = 1
 
-    em = discord.Embed(title=':oncoming_automobile: Type Racer Rankings [WPM]', description=f'{lb}')
-    await ctx.send(embed=em)
+        for i in range(10):
 
-  @commands.command(aliases=['give'])
-  async def user_add(self, ctx, user: discord.Member, amount):
+            money = res[i][1]['money']
 
-    if user == ctx.author:
-      await ctx.send('You cannot give money to yourself dumbass.')
+            p = await client.fetch_user(int(res[i][0]))
+            person = p.name
 
-    else:
-      with open('./cogs/Data/economy.json', 'r') as f:
-        users = json.load(f)
+            lb += f'{count}. {person} - `{money}` 🥔\n'
 
-      await self.check(users, user)
+            count += 1
 
-      curr_money = users[f'{ctx.author.id}']['money']
-      if curr_money > int(amount):
-        users[f'{ctx.author.id}']['money'] -= int(amount)
-        users[f'{user.id}']['money'] += int(amount)
-  
-        await ctx.send(f'**{ctx.author}** has transferred {int(amount)} 🥔 to {user.mention}')
+        em = discord.Embed(
+            title=':oncoming_automobile: Type Racer Rankings [Money]',
+            description=f'{lb}')
+        await ctx.send(embed=em)
 
-      else:
-        await ctx.send('You don\'t have enought money dumbass')
+    @commands.command(aliases=['lbwpm'])
+    async def leaderboard_wpm(self, ctx):
 
-      with open('./cogs/Data/economy.json', 'w') as f:
-        json.dump(users, f, indent=4) 
-                    
-  
-  @commands.command()
-  async def admin_add(self, ctx, user: discord.Member, amount):
+        with open('./cogs/Data/wpm.json', 'r') as f:
+            users = json.load(f)
 
-    if ctx.author.id == 305681776427139073 or ctx.author.id==335808768979894283:
-      with open('./cogs/Data/economy.json', 'r') as f:
-        users = json.load(f)
+        lb = ''
 
-      await self.check(users, user)
+        res = sorted(users.items(), key=lambda x: x[1]['wpm'])
+        res.reverse()
 
-      users[f'{user.id}']['money'] += int(amount)
+        count = 1
 
-      await  ctx.send(f"{amount} 🥔 added to {user}'s account")
+        if len(res) > 10:
+            for i in range(10):
 
-      with open('./cogs/Data/economy.json', 'w') as f:
-        json.dump(users, f, indent=4)    
+                money = res[i][1]['wpm']
 
-  @commands.command()
-  async def admin_del(self, ctx, user: discord.Member, amount):
+                p = await client.fetch_user(int(res[i][0]))
+                person = p.name
 
-    if ctx.author.id == 305681776427139073 or ctx.author.id==335808768979894283: 
-      with open('./cogs/Data/economy.json', 'r') as f:
-        users = json.load(f)
+                lb += f'{count}. {person} - `{money}` WPM\n'
 
-      await self.check(users, user)
+                count += 1
 
-      users[f'{user.id}']['money'] -= int(amount)
+        else:
+            for i in range(len(res)):
 
-      await  ctx.send(f"{amount} 🥔 removed {user}'s account")
+                money = res[i][1]['wpm']
 
-      with open('./cogs/Data/economy.json', 'w') as f:
-        json.dump(users, f, indent=4) 
+                p = await client.fetch_user(int(res[i][0]))
+                person = p.name
 
-  @commands.Cog.listener()
-  async def on_command_error(self, ctx, error):
-      if isinstance(error, commands.CommandOnCooldown):
-        command = client.get_command('race')
-        await ctx.send(f'**You are on cooldown!** Retry after `{round(command.get_cooldown_retry_after(ctx), 2)}` seconds [Due to rate-limit]')
-          
+                lb += f'{count}. {person} - `{money}` WPM\n'
+
+                count += 1
+
+        em = discord.Embed(
+            title=':oncoming_automobile: Type Racer Rankings [WPM]',
+            description=f'{lb}')
+        await ctx.send(embed=em)
+
+    @commands.command(aliases=['give'])
+    async def user_add(self, ctx, user: discord.Member, amount):
+
+        if user == ctx.author:
+            await ctx.send('You cannot give money to yourself dumbass.')
+
+        else:
+            with open('./cogs/Data/economy.json', 'r') as f:
+                users = json.load(f)
+
+            await self.check(users, user)
+
+            curr_money = users[f'{ctx.author.id}']['money']
+            if curr_money > int(amount):
+                users[f'{ctx.author.id}']['money'] -= int(amount)
+                users[f'{user.id}']['money'] += int(amount)
+
+                await ctx.send(
+                    f'**{ctx.author}** has transferred {int(amount)} 🥔 to {user.mention}'
+                )
+
+            else:
+                await ctx.send('You don\'t have enought money dumbass')
+
+            with open('./cogs/Data/economy.json', 'w') as f:
+                json.dump(users, f, indent=4)
+
+    @commands.command()
+    async def admin_add(self, ctx, user: discord.Member, amount):
+
+        if ctx.author.id == 305681776427139073 or ctx.author.id == 335808768979894283:
+            with open('./cogs/Data/economy.json', 'r') as f:
+                users = json.load(f)
+
+            await self.check(users, user)
+
+            users[f'{user.id}']['money'] += int(amount)
+
+            await ctx.send(f"{amount} 🥔 added to {user}'s account")
+
+            with open('./cogs/Data/economy.json', 'w') as f:
+                json.dump(users, f, indent=4)
+
+    @commands.command()
+    async def admin_del(self, ctx, user: discord.Member, amount):
+
+        if ctx.author.id == 305681776427139073 or ctx.author.id == 335808768979894283:
+            with open('./cogs/Data/economy.json', 'r') as f:
+                users = json.load(f)
+
+            await self.check(users, user)
+
+            users[f'{user.id}']['money'] -= int(amount)
+
+            await ctx.send(f"{amount} 🥔 removed {user}'s account")
+
+            with open('./cogs/Data/economy.json', 'w') as f:
+                json.dump(users, f, indent=4)
+
+    @commands.Cog.listener()
+    async def on_command_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            command = client.get_command('race')
+            await ctx.send(
+                f'**You are on cooldown!** Retry after `{round(command.get_cooldown_retry_after(ctx), 2)}` seconds [Due to rate-limit]'
+            )
+
 
 def setup(client):
 
-  client.add_cog(Economy(client))
+    client.add_cog(Economy(client))
